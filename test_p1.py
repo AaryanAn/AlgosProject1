@@ -1,4 +1,4 @@
-from bishoy import program1
+from bishoy1 import program1
 from bishoy2 import program2
 
 

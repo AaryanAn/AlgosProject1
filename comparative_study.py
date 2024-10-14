@@ -1,8 +1,8 @@
 import time
 import random
 import matplotlib.pyplot as plt
-from program1 import program1  # Import program1 function from program1.py
-from program2 import program2  # Import program2 function from program2.py
+from bishoy1 import program1  # Import program1 function from program1.py
+from bishoy2 import program2  # Import program2 function from program2.py
 
 def generate_random_input(n: int, W: int):
     """
