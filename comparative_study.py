@@ -1,16 +1,19 @@
 import time
 import random
 import matplotlib.pyplot as plt
-from bishoy1 import program1  # Import program1 function from program1.py
-from bishoy2 import program2  # Import program2 function from program2.py
+from program1 import program1  # Import program1 function from program1.py
+from program2 import program2  # Import program2 function from program2.py
 
-def generate_random_input(n: int, W: int):
+def generate_unimodal_input(n: int, W: int):
     """
-    Generate a random input with n paintings and platform width W.
-    Heights are random integers between 1 and 100.
+    Generate random unimodal input with n paintings and platform width W.
+    Heights follow a unimodal sequence: first decreasing, then increasing.
     Widths are random integers between 1 and W//2 to ensure the width constraint.
     """
-    heights = [random.randint(1, 100) for _ in range(n)]
+    min_index = random.randint(1, n-2)  # Ensure there's a valid turning point
+    decreasing_part = sorted([random.randint(1, 100) for _ in range(min_index)], reverse=True)
+    increasing_part = sorted([random.randint(1, 100) for _ in range(n - min_index)], reverse=False)
+    heights = decreasing_part + increasing_part
     widths = [random.randint(1, W // 2) for _ in range(n)]
     return heights, widths
 
@@ -40,14 +43,18 @@ def main():
 
         # Run 5 experiments for each n
         for _ in range(runs_per_n):
-            heights, widths = generate_random_input(n, W)
-            
+            # Generate input for Program1 (no need for unimodal pattern)
+            heights_p1, widths_p1 = generate_unimodal_input(n, W)
+
             # Measure runtime for Program1
-            time_p1 = measure_runtime(program1, n, W, heights, widths)
+            time_p1 = measure_runtime(program1, n, W, heights_p1, widths_p1)
             total_time_p1 += time_p1
 
+            # Generate unimodal input for Program2
+            heights_p2, widths_p2 = generate_unimodal_input(n, W)
+
             # Measure runtime for Program2
-            time_p2 = measure_runtime(program2, n, W, heights, widths)
+            time_p2 = measure_runtime(program2, n, W, heights_p2, widths_p2)
             total_time_p2 += time_p2
 
         # Compute the average time over the 5 runs
