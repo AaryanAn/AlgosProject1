@@ -16,6 +16,22 @@ def program1(n: int, W: int, heights: List[int], widths: List[int]) -> Tuple[int
     List[int]: number of paintings on each platform
     """
     ############################
+    num_of_platforms = []
+    width_for_platform = 0
+    max_height_for_platform = 0
+    curr_paintings_total = 0
+    paintings_per_platform = []
+
+    for i in range(n):
+        # Create new platform if current platform is FULL
+        if widths[i] + width_for_platform > W:
+            paintings_per_platform.append(curr_paintings_total)
+
+            num_of_platforms.append(max_height_for_platform)
+
+            # Reset parameters for next platform
+            
+
     # Add you code here
     ############################
 
