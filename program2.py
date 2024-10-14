@@ -1,20 +1,12 @@
 from typing import List, Tuple
     
 def find_minimum_index(heights: List[int]) -> int:
-    """
-    Find the index of the minimum value in a unimodal list of heights.
-    The list first decreases, reaches a minimum, then increases.
-    
-    Parameters:
-    heights (List[int]): List of heights
-    
-    Returns:
-    int: Index of the minimum value
-    """
     n = len(heights)
     for i in range(1, n):
         if heights[i] > heights[i - 1]:
+
             return i - 1  # Found the minimum point where the increase starts
+        
     return n - 1  # If no increase is found, the last element is the minimum
 
 def program2(n: int, W: int, heights: List[int], widths: List[int]) -> Tuple[int, int, List[int]]:
@@ -53,6 +45,7 @@ def program2(n: int, W: int, heights: List[int], widths: List[int]) -> Tuple[int
         # Create new platform if the current platform is FULL
 
         if widths[i] + curr_width_for_platform > W:
+
             paintings_per_platform.append(curr_paintings_total)  # Number of paintings on current platform
             num_of_platforms.append(curr_height_for_platform)  # Max height of current platform
 
