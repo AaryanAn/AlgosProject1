@@ -46,13 +46,12 @@ def program1(n: int, W: int, heights: List[int], widths: List[int]) -> Tuple[int
             num_of_platforms.append(curr_height_for_platform)
             paintings_per_platform.append(curr_paintings_total)
 
-        return len(num_of_platforms), sum(num_of_platforms), paintings_per_platform
+    return len(num_of_platforms), sum(num_of_platforms), paintings_per_platform
 
 
     # Add you code here
     ############################
 
-    return 0, 0, [] # replace with your code
 
 
 if __name__ == '__main__':
