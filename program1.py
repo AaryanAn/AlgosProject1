@@ -15,7 +15,6 @@ def program1(n: int, W: int, heights: List[int], widths: List[int]) -> Tuple[int
     int: optimal total height
     List[int]: number of paintings on each platform
     """
-    ############################
     num_of_platforms = []
     curr_width_for_platform = 0
     curr_height_for_platform = 0
@@ -23,35 +22,30 @@ def program1(n: int, W: int, heights: List[int], widths: List[int]) -> Tuple[int
     paintings_per_platform = []
 
     for i in range(n):
-        # Create new platform if current platform is FULL
+        # Create new platform if the current platform is FULL
         if widths[i] + curr_width_for_platform > W:
-            paintings_per_platform.append(curr_paintings_total)
+            paintings_per_platform.append(curr_paintings_total)  # Number of paintings on current platform
+            num_of_platforms.append(curr_height_for_platform)  # Max height of current platform
 
-            num_of_platforms.append(curr_height_for_platform)
-
-            # Reset parameters for next platform
+            # Reset parameters for the next platform
 
             curr_width_for_platform = 0
             curr_height_for_platform = 0
             curr_paintings_total = 0
 
-        # Append all values to the current shelf (this will be initial since if statement will not be triggered first time)
+        # Add painting to the current platform
 
         curr_paintings_total += 1
         curr_width_for_platform += widths[i]
-        curr_height_for_platform += max(curr_height_for_platform, heights[i])
-        
-        # We must add the last shelf on its own since we rely on the next shelf being finished 
-        if curr_paintings_total > 0:
-            num_of_platforms.append(curr_height_for_platform)
-            paintings_per_platform.append(curr_paintings_total)
+        curr_height_for_platform = max(curr_height_for_platform, heights[i])
+    
+    # We must add the last platform after the loop (this handles the last set of paintings)
+    
+    if curr_paintings_total > 0:
+        num_of_platforms.append(curr_height_for_platform)
+        paintings_per_platform.append(curr_paintings_total)
 
     return len(num_of_platforms), sum(num_of_platforms), paintings_per_platform
-
-
-    # Add you code here
-    ############################
-
 
 
 if __name__ == '__main__':
@@ -65,4 +59,3 @@ if __name__ == '__main__':
     print(total_height)
     for i in num_paintings:
         print(i)
-    
